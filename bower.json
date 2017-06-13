@@ -1,0 +1,9 @@
+{
+  "name": "fb-challenge",
+  "version": "0.0.1",
+  "dependencies": {
+    "bootstrap": "v4.0.0-alpha.6",
+    "jquery": "^3.2.1",
+    "underscore": "^1.8.3"
+  }
+}

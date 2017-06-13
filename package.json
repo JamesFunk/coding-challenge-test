@@ -1,0 +1,18 @@
+{
+  "name": "fb-challenge",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "^4.15.3"
+  },
+  "devDependencies": {
+    "bower": "~1.7.7"
+  },
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jfunk09/coding-challenge-test.git"
+  },
+  "author": "James FUnk",
+  "homepage": "https://github.com/jfunk09/coding-challenge-test#readme"
+}
