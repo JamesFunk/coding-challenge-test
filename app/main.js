@@ -48,30 +48,42 @@
 	app.factory('ContentProvider', contentProviderService);
 
 	app.controller('appCtrl', ['$scope', '$location', 'Facebook', function ($scope, $location, Facebook) {
-		$scope.variable = 'Haaaallo world!';
+		$scope.loggedIn = false;
+		$scope.user = {};
 		$scope.go = function(path) {
 			$location.path(path);
 		};
-		$scope.stuff = 0;
-		$scope.add = function() {
-			$scope.stuff = $scope.stuff + 1;
+
+		$scope.login = function() {
+			Facebook.login(function(response) {
+				if(response.status === 'connected') {
+					$scope.loggedIn = true;
+					$location.path('/');
+				} else {
+					console.log('Login failed');
+				}
+			});
 		};
 
+		$scope.logout = function () {
+			Facebook.logout();
+			$scope.loggedIn = false;
+			$location.path('/login');
+		};
 
 		$scope.$watch(function () {
 			return Facebook.isReady();
 		}, function (newVal) {
-			$scope.facebookReady = true;
-			console.log('fb ready');
+			if(newVal) {
+				Facebook.getLoginStatus(function (response) {
+					if(response.status === 'connected') {
+						$scope.loggedIn = true;
+					} else {
+						$location.path('/login');
+					}
+				})
+			}
 		});
-
-		$scope.login = function() {
-			// From now on you can use the Facebook service just as Facebook api says
-			Facebook.login(function(response) {
-				// Do something with response.
-				console.log('success!?', response);
-			});
-		};
 	}]);
 
 	app.controller('authenticationCtrl', function($scope, Facebook) {
