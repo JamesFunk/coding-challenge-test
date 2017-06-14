@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="app">
+<html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>FB Challenge</title>
@@ -11,9 +11,28 @@
 	<link rel="stylesheet" type="text/css" href="bc/ng-dialog/css/ngDialog-theme-default.css" />
 	<link rel="stylesheet" type="text/css" href="styles/styles.css" />
 </head>
-<body>
+<body ng-app="app">
+<script>
+	window.fbAsyncInit = function() {
+		FB.init({
+			appId            : 1563656153652814,
+			autoLogAppEvents : true,
+			xfbml            : true,
+			version          : 'v2.9'
+		});
+		FB.AppEvents.logPageView();
+	};
 
-<div class="container-fluid" ng-view></div>
+	(function(d, s, id){
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) {return;}
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/en_US/sdk.js";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="container-fluid" ng-view ng-controller="appCtrl"></div>
 
 <script type="text/javascript" src="bc/jquery/dist/jquery.js"></script>
 <script type="text/javascript" src="bc/tether/dist/js/tether.js"></script>
@@ -22,8 +41,6 @@
 <script type="text/javascript" src="bc/angular/angular.js"></script>
 <script type="text/javascript" src="bc/angular-route/angular-route.js"></script>
 <script type="text/javascript" src="bc/ng-dialog/js/ngDialog.js"></script>
-
 <script type="text/javascript" src="public/main.js"></script>
-
 </body>
 </html>

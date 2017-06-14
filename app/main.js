@@ -18,8 +18,9 @@
 	app.config(['$routeProvider', function ($routeProvider) {
 		const ContentProvider = contentProviderService();
 		$routeProvider.when('/', {
-			controller: 'appCtrl',
 			templateUrl: ContentProvider.getTemplateUrl('main.html')
+		}).when('/login', {
+			template: '<div>Time to log in</div>'
 		}).otherwise('/');
 	}]);
 
@@ -35,7 +36,14 @@
 
 	app.factory('ContentProvider', contentProviderService);
 
-	app.controller('appCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
+	app.controller('appCtrl', ['$scope', '$location', function ($scope, $location) {
 		$scope.variable = 'Haaaallo world!';
+		$scope.go = function(path) {
+			$location.path(path);
+		};
+		$scope.stuff = 0;
+		$scope.add = function() {
+			$scope.stuff = $scope.stuff + 1;
+		}
 	}]);
 })();
