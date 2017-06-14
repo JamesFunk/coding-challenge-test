@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <div ng-show="loggedIn">
-	<div class="sign-out-container">
-		<button ng-click="logout()">Sign out</button>
-	</div>
+	<logout></logout>
 	<div class="container main-container">
 		<div class="row">
 			<h1 class="col-12">My books</h1>
 			<div class="col-12">
-				<button ng-click="go('/login')">Add book</button>
+				<button class="btn btn-primary" ng-click="go('/add')">Add book</button>
 			</div>
+		</div>
+		<div class="row" ng-repeat="book in books">
+			<book title="{{book.title}}" author="{{book.author}}" desc="{{book.desc}}"></book>
 		</div>
 	</div>
 </div>

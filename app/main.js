@@ -21,9 +21,11 @@
 		const ContentProvider = contentProviderService();
 		$routeProvider.when('/', {
 			templateUrl: ContentProvider.getTemplateUrl('main.html')
+		}).when('/add', {
+			templateUrl: ContentProvider.getTemplateUrl('add.html')
 		}).when('/login', {
 			templateUrl: ContentProvider.getTemplateUrl('login.html')
-		}).otherwise('/');
+		}).otherwise({redirectTo: '/'});
 	}]);
 
 	app.config(['$locationProvider', function ($locationProvider) {
@@ -50,6 +52,8 @@
 	app.controller('appCtrl', ['$scope', '$location', 'Facebook', function ($scope, $location, Facebook) {
 		$scope.loggedIn = false;
 		$scope.user = {};
+		$scope.books = [];
+		$scope.new = {};
 		$scope.go = function(path) {
 			$location.path(path);
 		};
@@ -82,6 +86,16 @@
 			});
 		};
 
+		$scope.addBook = function () {
+			$scope.books.push({
+				title: $scope.new.title,
+				author: $scope.new.author,
+				desc: $scope.new.desc
+			});
+			$scope.new = {};
+			$scope.go('/');
+		};
+
 		$scope.$watch(function () {
 			return Facebook.isReady();
 		}, function (newVal) {
@@ -97,5 +111,32 @@
 			}
 		});
 	}]);
+
+	app.directive('logout', ['ContentProvider', function (ContentProvider) {
+		return {
+			restrict: 'E',
+			templateUrl: ContentProvider.getTemplateUrl('logout.html')
+		};
+	}]);
+
+	app.directive('book', ['ContentProvider', function (ContentProvider) {
+		return {
+			restrict: 'E',
+			scope: {
+				title: '@',
+				author: '@',
+				desc: '@'
+			},
+			templateUrl: ContentProvider.getTemplateUrl('book.html'),
+			controller: ['$scope', 'Facebook', function ($scope, Facebook) {
+				$scope.publish = function () {
+					Facebook.ui({
+						method: 'feed',
+						message: $scope.title + '\nby ' + $scope.author + '\n\n' + $scope.desc
+					});
+				};
+			}]
+		}
+	}])
 
 })();

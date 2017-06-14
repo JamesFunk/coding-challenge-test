@@ -9,7 +9,7 @@ app.use('/bc', express.static('bower_components'));
 app.use('/styles', express.static('styles'));
 app.use('/partials', express.static('templates/partials'));
 
-app.get('/', function (req, res) {
+app.get('/*', function (req, res) {
 	res.sendFile(path.join(__dirname + '/templates/index.html'));
 });
 

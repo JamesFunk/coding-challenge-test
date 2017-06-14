@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<div ng-show="loggedIn">
+	<logout></logout>
+	<div class="container main-container">
+		<div class="row">
+			<h1 class="col-12">Add book</h1>
+			<form class="col-12">
+				<div class="form-group">
+					<label for="title">Title:</label>
+					<input type="text" class="form-control" id="title" ng-model="new.title">
+				</div>
+				<div class="form-group">
+					<label for="author">Author:</label>
+					<input type="text" class="form-control" id="author" ng-model="new.author">
+				</div>
+				<div class="form-group">
+					<label for="desc">Description:</label>
+					<textarea class="form-control" rows="4" id="desc" ng-model="new.desc"></textarea>
+				</div>
+				<div class="form-buttons">
+					<button class="btn btn-secondary" ng-click="go('/')">Cancel</button>
+					<button class="btn btn-primary" ng-click="addBook()">Add book</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+</html>
