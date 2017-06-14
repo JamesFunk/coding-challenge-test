@@ -90,8 +90,14 @@
 			$scope.books.push({
 				title: $scope.new.title,
 				author: $scope.new.author,
+				link: $scope.new.link,
 				desc: $scope.new.desc
 			});
+			$scope.new = {};
+			$scope.go('/');
+		};
+
+		$scope.cancelAdd = function () {
 			$scope.new = {};
 			$scope.go('/');
 		};
@@ -125,6 +131,7 @@
 			scope: {
 				title: '@',
 				author: '@',
+				link: '@',
 				desc: '@'
 			},
 			templateUrl: ContentProvider.getTemplateUrl('book.html'),
@@ -132,8 +139,7 @@
 				$scope.publish = function () {
 					Facebook.ui({
 						method: 'feed',
-						link: 'https://peaceful-anchorage-56323.herokuapp.com/',
-						caption: $scope.title + '\nby ' + $scope.author + '\n\n' + $scope.desc
+						link: $scope.link
 					});
 				};
 			}]
