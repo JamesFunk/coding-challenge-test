@@ -20,7 +20,7 @@
 	app.config(['$routeProvider', function ($routeProvider) {
 		const ContentProvider = contentProviderService();
 		$routeProvider.when('/', {
-			templateUrl: ContentProvider.getTemplateUrl('login.html')
+			templateUrl: ContentProvider.getTemplateUrl('main.html')
 		}).when('/login', {
 			templateUrl: ContentProvider.getTemplateUrl('login.html')
 		}).otherwise('/');
@@ -82,20 +82,20 @@
 			});
 		};
 
-		// $scope.$watch(function () {
-		// 	return Facebook.isReady();
-		// }, function (newVal) {
-		// 	if(newVal) {
-		// 		Facebook.getLoginStatus(function (response) {
-		// 			if(response.status === 'connected') {
-		// 				$scope.loggedIn = true;
-		// 				$scope.me();
-		// 			} else {
-		// 				$location.path('/login');
-		// 			}
-		// 		})
-		// 	}
-		// });
+		$scope.$watch(function () {
+			return Facebook.isReady();
+		}, function (newVal) {
+			if(newVal) {
+				Facebook.getLoginStatus(function (response) {
+					if(response.status === 'connected') {
+						$scope.loggedIn = true;
+						$scope.me();
+					} else {
+						$location.path('/login');
+					}
+				})
+			}
+		});
 	}]);
 
 })();
