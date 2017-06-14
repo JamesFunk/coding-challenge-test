@@ -133,11 +133,11 @@
 					Facebook.ui({
 						method: 'feed',
 						link: 'https://peaceful-anchorage-56323.herokuapp.com/',
-						message: $scope.title + '\nby ' + $scope.author + '\n\n' + $scope.desc
+						caption: $scope.title + '\nby ' + $scope.author + '\n\n' + $scope.desc
 					});
 				};
 			}]
-		}
-	}])
+		};
+	}]);
 
 })();
