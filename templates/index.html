@@ -1,20 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="app">
 <head>
 	<meta charset="UTF-8">
 	<title>FB Challenge</title>
+	<base href="/">
+
+	<link rel="stylesheet" type="text/css" href="bc/tether/dist/css/tether.css" />
+	<link rel="stylesheet" type="text/css" href="bc/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="bc/ng-dialog/css/ngDialog.css" />
+	<link rel="stylesheet" type="text/css" href="bc/ng-dialog/css/ngDialog-theme-default.css" />
+	<link rel="stylesheet" type="text/css" href="styles/styles.css" />
 </head>
 <body>
 
-<h1>Howdy World!</h1>
-
-
+<div class="container-fluid" ng-view></div>
 
 <script type="text/javascript" src="bc/jquery/dist/jquery.js"></script>
 <script type="text/javascript" src="bc/tether/dist/js/tether.js"></script>
 <script type="text/javascript" src="bc/bootstrap/dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="bc/underscore/underscore.js"></script>
-<script type="text/javascript" src="../public/main.js"></script>
+<script type="text/javascript" src="bc/angular/angular.js"></script>
+<script type="text/javascript" src="bc/angular-route/angular-route.js"></script>
+<script type="text/javascript" src="bc/ng-dialog/js/ngDialog.js"></script>
+
+<script type="text/javascript" src="public/main.js"></script>
 
 </body>
 </html>

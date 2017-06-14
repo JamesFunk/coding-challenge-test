@@ -1,0 +1,10 @@
+.sign-out-container {
+	position: fixed;
+	top: 5px;
+	right: 5px;
+}
+
+.main-container {
+	width: 600px;
+	margin-top: 80px;
+}
