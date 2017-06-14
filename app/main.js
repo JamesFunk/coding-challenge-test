@@ -20,7 +20,7 @@
 	app.config(['$routeProvider', function ($routeProvider) {
 		const ContentProvider = contentProviderService();
 		$routeProvider.when('/', {
-			templateUrl: ContentProvider.getTemplateUrl('main.html')
+			templateUrl: ContentProvider.getTemplateUrl('login.html')
 		}).when('/login', {
 			templateUrl: ContentProvider.getTemplateUrl('login.html')
 		}).otherwise('/');
@@ -55,54 +55,25 @@
 		};
 
 		$scope.login = function() {
-			Facebook.login(function(response) {
-				if(response.status === 'connected') {
-					$scope.loggedIn = true;
-					$location.path('/');
-				} else {
-					console.log('Login failed');
-				}
-			});
+			if(!$scope.loggedIn) {
+				Facebook.login(function(response) {
+					if(response.status === 'connected') {
+						$scope.loggedIn = true;
+						$location.path('/');
+					} else {
+						console.log('Login failed');
+					}
+				});
+			} else {
+				$location.path('/');
+			}
 		};
 
 		$scope.logout = function () {
 			Facebook.logout();
 			$scope.loggedIn = false;
+			$scope.user = {};
 			$location.path('/login');
-		};
-
-		$scope.$watch(function () {
-			return Facebook.isReady();
-		}, function (newVal) {
-			if(newVal) {
-				Facebook.getLoginStatus(function (response) {
-					if(response.status === 'connected') {
-						$scope.loggedIn = true;
-					} else {
-						$location.path('/login');
-					}
-				})
-			}
-		});
-	}]);
-
-	app.controller('authenticationCtrl', function($scope, Facebook) {
-
-		$scope.login = function() {
-			// From now on you can use the Facebook service just as Facebook api says
-			Facebook.login(function(response) {
-				// Do something with response.
-			});
-		};
-
-		$scope.getLoginStatus = function() {
-			Facebook.getLoginStatus(function(response) {
-				if(response.status === 'connected') {
-					$scope.loggedIn = true;
-				} else {
-					$scope.loggedIn = false;
-				}
-			});
 		};
 
 		$scope.me = function() {
@@ -110,6 +81,21 @@
 				$scope.user = response;
 			});
 		};
-	});
+
+		// $scope.$watch(function () {
+		// 	return Facebook.isReady();
+		// }, function (newVal) {
+		// 	if(newVal) {
+		// 		Facebook.getLoginStatus(function (response) {
+		// 			if(response.status === 'connected') {
+		// 				$scope.loggedIn = true;
+		// 				$scope.me();
+		// 			} else {
+		// 				$location.path('/login');
+		// 			}
+		// 		})
+		// 	}
+		// });
+	}]);
 
 })();

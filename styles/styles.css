@@ -8,3 +8,17 @@
 	width: 600px;
 	margin-top: 80px;
 }
+
+.login-container {
+	text-align: center;
+	height: 100vh;
+}
+
+.login-button {
+	width: 200px;
+	height: 40px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin: -20px 0 0 -100px;
+}
